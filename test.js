@@ -1,6 +1,6 @@
 alert("test");
 
-class Test {
+export class Test {
     constructor(a, b) {
       this.a = a;
       this.b = b;
