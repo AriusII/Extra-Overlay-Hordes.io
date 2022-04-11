@@ -12,6 +12,6 @@ class Test {
     }
 
     test() {
-        alert(`a:${a} | b:${b}`)
+        alert(`a:${this.a} | b:${this.b}`)
     }
 }
