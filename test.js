@@ -5,7 +5,7 @@ unsafeWindow.sayHelloTo = function sayHelloTo (name) {
     console.log(`Hello ${name}!`)
 }
 
-export class Test {
+/*export class Test {
     constructor(a, b) {
       this.a = a;
       this.b = b;
@@ -14,4 +14,4 @@ export class Test {
     test() {
         alert(`a:${a} | b:${b}`)
     }
-  }
+}*/
