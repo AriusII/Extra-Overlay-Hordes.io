@@ -1,4 +1,9 @@
-alert("test");
+console.log("test")
+
+// @grant unsafeWindow
+unsafeWindow.sayHelloTo = function sayHelloTo (name) {
+    console.log(`Hello ${name}!`)
+}
 
 export class Test {
     constructor(a, b) {
