@@ -57,6 +57,7 @@ class Core {
 
         let coreHtml = await fetch("https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Core.html").then(res => res.text());
         document.querySelector(".l-ui.layout > .container:first-child").insertAdjacentHTML('beforeend', coreHtml);
+        document.querySelector(".MainBody").style.setProperty("display", "none");
 
         this.loadExtensionsMenu();
         document.getElementById("MenuFrame").innerHTML = new Home().getUI();
@@ -67,11 +68,13 @@ class Core {
 
     toggleUI() {
         this.ShowUI ^= 1;
+        console.log(this.ShowUI);
         if (this.show_ui) {
-            document.querySelector(".MainBody").style.display = "block";
+            document.querySelector(".MainBody").style.setProperty("display", "block");
         } else {
-            document.querySelector(".MainBody").style.display = "none";
+            document.querySelector(".MainBody").style.setProperty("display", "none");
         }
+        console.log(document.querySelector(".MainBody").style.display);
     }
 
     loadExtensionsMenu() {
