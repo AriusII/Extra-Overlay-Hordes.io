@@ -4,9 +4,9 @@ class Extension {
         "window_name": this.windowName
     }
 
-    constructor(id, name, windowName) {
+    constructor(id, path, windowName) {
         this.id = id;
-        this.name = name;
+        this.path = path;
         this.windowName = windowName;
     }
 
@@ -17,12 +17,8 @@ class Extension {
     }
 
     getUI() {
-        //return new FileReader().readAsText(`${this.name}.html`);
-        return new FileReader().readAsText(new File(
-            [new Blob()], 
-            `${this.name}.html`/*"file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Core.html"*/)
-        )
-        
+        return await fetch(`https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Extensions/${this.path}.html`)
+            .then(res => res.text());
     }
 
     initEvents() {

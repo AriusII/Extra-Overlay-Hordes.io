@@ -67,14 +67,12 @@ class Core {
     }
 
     toggleUI() {
-        this.ShowUI ^= 1;
-        console.log(this.ShowUI);
+        this.show_ui ^= 1;
         if (this.show_ui) {
             document.querySelector(".MainBody").style.setProperty("display", "block");
         } else {
             document.querySelector(".MainBody").style.setProperty("display", "none");
         }
-        console.log(document.querySelector(".MainBody").style.display);
     }
 
     loadExtensionsMenu() {

@@ -1,7 +1,7 @@
 class AutoLoot extends Extension {
 
     constructor() {
-        super("auto-loot", "AutoLoot", "Auto Loot");
+        super("auto-loot", "Auto Loot/AutoLoot", "Auto Loot");
     }
 
 }
