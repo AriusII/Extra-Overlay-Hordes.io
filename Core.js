@@ -38,9 +38,7 @@ class Core {
     }
 
     loadExtensions(name) {
-        this.extensions.forEach(extension => {
-            return Promise.resolve(extension.init(this.name));
-        })
+        this.extensions.forEach(extension => Promise.resolve(extension.init(this.name)))
     }
 
     async createUI() {
