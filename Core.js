@@ -20,8 +20,8 @@ class Core {
             await Promise.resolve(this.loadExtensions());
 
             setInterval(() => {
-                if (!document.getElementById("uiBtn")) {
-                    this.createIcon();
+                if (!this.is_loaded) {
+                    this.createUI();
                 }
             }, 1000);
 
@@ -43,39 +43,35 @@ class Core {
         })
     }
 
-    createIcon() {
+    async createUI() {
+        if (!document.querySelector(".l-corner-ur .btnbar #sysgem")) return;
+
+        this.is_loaded = true;
+
+        // Create Icon
         document.querySelector(".l-corner-ur .btnbar #sysgem")?.insertAdjacentHTML('afterend',
             `<div id="uiBtn" class="btn border black">
                 <img class="svgicon" src="https://www.svgrepo.com/show/284868/unsecured-shield-hacker.svg">
             </div>`);
-        document.querySelector("#uiBtn")?.addEventListener('click', e => this.createUI());
+        document.querySelector("#uiBtn")?.addEventListener('click', e => this.toggleUI());
+
+        let coreHtml = await fetch("https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Core.html").then(res => res.text());
+        document.querySelector(".l-ui.layout > .container:first-child").insertAdjacentHTML('beforeend', coreHtml);
+
+        this.loadExtensionsMenu();
+        document.getElementById("MenuFrame").innerHTML = new Home().getUI();
+        this.loadExtensionsMenuEvents();
+
+        document.querySelector('.CloseMain').addEventListener('click', () => this.toggleUI());
     }
 
-    createUI() {
-        if (!this.show_ui) {
-            document.querySelector(".l-ui.layout > .container:first-child")
-                .insertAdjacentHTML('beforeend', new FileReader().readAsText(new File(
-                    [new Blob()], 
-                    "Core.html"/*"file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Core.html"*/)
-                ));
-            console.log("first", new FileReader().readAsText(new File(
-                [new Blob()], 
-                "Core.html"/*"file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Core.html"*/)
-            ));
-            console.log("second", new FileReader().readAsText(new File(
-                [new Blob()], 
-                "file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Core.html")
-            ));
-
-            this.loadExtensionsMenu();
-            document.getElementById("MenuFrame").innerHTML = new Home().getUI();
-            this.loadExtensionsMenuEvents();
-
-            document.querySelector('.CloseMain').addEventListener('click', () => this.createUI());
-        } else {
-            document.querySelector(".MainBody").remove();
-        }
+    toggleUI() {
         this.ShowUI ^= 1;
+        if (this.show_ui) {
+            document.querySelector(".MainBody").style.display = "block";
+        } else {
+            document.querySelector(".MainBody").style.display = "none";
+        }
     }
 
     loadExtensionsMenu() {
