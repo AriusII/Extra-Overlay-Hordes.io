@@ -1,7 +1,7 @@
 console.log("test")
 
 // @grant unsafeWindow
-unsafeWindow.sayHelloTo = function sayHelloTo (name) {
+sayHelloTo = function sayHelloTo (name) {
     console.log(`Hello ${name}!`)
 }
 
