@@ -66,7 +66,7 @@ class CustomMenu {
     /**
      * It inserts HTML into a div with the ID "MenuFrame".
      */
-    MenuFrame_Custom() {
+     MenuFrame_Custom() {
         document.getElementById("MenuFrame").insertAdjacentHTML('beforeend',
             `<div class="settings svelte-ntyx09">
                 <h3 class="textprimary">Extra CustomMenu</h3>

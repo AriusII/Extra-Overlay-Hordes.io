@@ -10,18 +10,16 @@
 // @namespace    https://greasyfork.org/users/898675
 // @license      MIT
 // @run-at       document-start
-// @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/HomeMenu.js
-// @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/CustomMenu.js
+// @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Extensions/Extension.js
+// @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Extensions/Home/Home.js
 // @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Core.js
 // ==/UserScript==
 
-/* global HomeMenu, CustomMenu, Core */
+/* global Core */
 
 (function() {
     'use strict'
-    const addons = [
-        new HomeMenu(),
-        new CustomMenu()
-    ]
-    new Core(addons).Init()
+    new Core([
+        //new AutoLoot()
+    ]).init()
 })()
