@@ -1,119 +1,90 @@
 class Core {
-    constructor(add) {
-        this.ShowUI = false
-        this.AddonsList = add
+
+    name = "arius"
+    show_ui = false;
+    is_loaded = false;
+
+    constructor(extensions) {
+        window[this.name] = {};
+        this.extensions = extensions;
     }
 
-    /**
-     * It fetches the game's HTML, replaces the script tag with a script tag that will run the game's code,
-     * and then writes the HTML to the document.
-     * 
-     * The reason I'm doing this is because I want to add a button to the game's UI. I'm doing this by
-     * adding a button to the HTML, and then using the game's code to make it do something.
-     * 
-     */
-    Init() {
-        document.write()
+    init() {
+        document.write();
         fetch('https://hordes.io/play').then(d => d.text()).then(async html => {
-            const element = html.match(/<script.*?client\.js.*?><\/script>/)[0]
-            const url = element.match(/src="(.*?)"/)[1]
-            html = html.replace(element, `<script>let _t=origin;delete origin;eval(_t)</script>`)
-            let origin = await fetch(url).then(d => d.text())
-            await Promise.resolve(this.LoadAddons_Window(origin))
+            const element = html.match(/<script.*?client\.js.*?><\/script>/)[0];
+            const url = element.match(/src="(.*?)"/)[1];
+            html = html.replace(element, `<script>let _t=origin;delete origin;eval(_t)</script>`);
+            let origin = await fetch(url).then(d => d.text());
+            
+            await Promise.resolve(this.loadExtensions());
 
             setInterval(() => {
-                if (document.getElementById("uiBtn") == null) {
-                    this.UISettingsButtonInBar()
+                if (!this.is_loaded) {
+                    this.createUI();
                 }
-            }, 1000)
+            }, 1000);
 
-            document.open().write(html)
-            document.close()
+            let world = origin.match(/([_a-zA-Z0-9]*?)\.entities\.array\.length;/)[1];
+            let coder = origin.match(/\,([_a-zA-Z0-9]*?)=\{clientPlayerInput:\{/)[1];
+            let ws = origin.match(/\(([_a-zA-Z0-9]*?)=new WebSocket/)[1];
+            let send = origin.match(/([_a-zA-Z0-9]*?)=[_a-zA-Z0-9]*?=>\{void 0!==[_a-zA-Z0-9]*?&&1===[_a-zA-Z0-9]*?&&[_a-zA-Z0-9]*?\.send\(.*?\)\}/)[1];
+            origin = origin.replace('this.player=t', `Object.assign(window.${this.name}, {world: ${world}, me:t, coder: ${coder}, ws: ${ws}, send: ${send} }), this.player=t`)
+            window.origin = origin
+
+            document.open().write(html);
+            document.close();
         })
     }
 
-    /**
-     * It creates a UI for the user to interact with.
-     */
-    CreateUI() {
-        if (!this.ShowUI) {
-            document.querySelector(".l-ui.layout > .container:first-child").insertAdjacentHTML('beforeend',
-                `<div class="container svelte-ntyx09 MainBody">
-                    <div class="window panel-black svelte-yjs4p5 MainSubMenu">
-                        <div class="titleframe svelte-yjs4p5 MainFrameTitle">
-                            <img src="https://www.svgrepo.com/show/284868/unsecured-shield-hacker.svg" class="titleicon svgicon svelte-yjs4p5">
-                            <div class="textprimary title svelte-yjs4p5">
-                                <div name="title">Extra Overlay Settings - By AriusII</div>
-                            </div>
-                            <img src="/assets/ui/icons/cross.svg?v=5699699" class="btn black svgicon CloseMain">
-                        </div>
-                        <div class="slot svelte-yjs4p5">
-                            <div id="MainDiv" class="divide svelte-ntyx09">
-                                <div id="SubMenu">
-                                
-                                </div>
-
-                                <div id="MenuFrame" class="menu panel-black scrollbar svelte-ntyx09">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>`)
-            this.LoadAddons_SubMenu()
-            new HomeMenu().MenuFrame_Home()
-            this.LoadAddons_Frame()
-            document.querySelector('.CloseMain').addEventListener('click', e => this.CreateUI());
-        } else {
-            document.querySelector(".MainBody").remove()
-        }
-        this.ShowUI ^= 1
+    loadExtensions(name) {
+        this.extensions.forEach(extension => Promise.resolve(extension.init(this.name)))
     }
 
-    /**
-     * It creates a button in the top bar of the page, and when clicked, it calls the CreateUI() function.
-     * @returns true.
-     */
-    UISettingsButtonInBar() {
+    async createUI() {
+        if (!document.querySelector(".l-corner-ur .btnbar #sysgem")) return;
+
+        this.is_loaded = true;
+
+        // Create Icon
         document.querySelector(".l-corner-ur .btnbar #sysgem")?.insertAdjacentHTML('afterend',
-            `<div id="uiBtn" class="btn border black"><img class="svgicon" src="https://www.svgrepo.com/show/284868/unsecured-shield-hacker.svg"></div>`)
-        document.querySelector("#uiBtn")?.addEventListener('click', e => this.CreateUI())
-        return true
+            `<div id="uiBtn" class="btn border black">
+                <img class="svgicon" src="https://www.svgrepo.com/show/284868/unsecured-shield-hacker.svg">
+            </div>`);
+        document.querySelector("#uiBtn")?.addEventListener('click', e => this.toggleUI());
+
+        let coreHtml = await fetch("https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Core.html").then(res => res.text());
+        document.querySelector(".l-ui.layout > .container:first-child").insertAdjacentHTML('beforeend', coreHtml);
+        document.querySelector(".MainBody").style.setProperty("display", "none");
+
+        this.loadExtensionsMenu();
+        document.getElementById("MenuFrame").innerHTML = new Home().getUI();
+        this.loadExtensionsMenuEvents();
+
+        document.querySelector('.CloseMain').addEventListener('click', () => this.toggleUI());
     }
 
-
-    /**
-     * It loops through the AddonsList array and calls the Init() function of each addon
-     */
-    LoadAddons_SubMenu() {
-        this.AddonsList.forEach(addon => {
-            return addon.Init_SubMenu()
-        })
+    toggleUI() {
+        this.show_ui ^= 1;
+        if (this.show_ui) {
+            document.querySelector(".MainBody").style.setProperty("display", "block");
+        } else {
+            document.querySelector(".MainBody").style.setProperty("display", "none");
+        }
     }
 
-    /**
-     * It adds an event listener to each addon's submenu, and when clicked, it clears the menu frame and
-     * inserts the addon's frame.
-     */
-    LoadAddons_Frame() {
-        this.AddonsList.forEach(addon => {
-            let SubMenu = document.getElementById(addon.name)
-            SubMenu.addEventListener('click', e => {
-                document.getElementById("MenuFrame").innerHTML = "";
-                if (addon.Init_MainFrame() != undefined) {
-                    document.getElementById('MenuFrame').insertAdjacentHTML('beforeend', addon.Init_MainFrame())
-                }
-            })
-        })
+    loadExtensionsMenu() {
+        this.extensions.forEach(extension => {
+            document.getElementById("SubMenu").insertAdjacentHTML('beforeend', 
+                `<div id=${extension.name} class="choice">${extension.windowName}</div>`);
+        });
     }
 
-    /**
-     * It's supposed to loop through an array of objects, and call a function in each object
-     * @param origin - The origin of the window.
-     */
-    LoadAddons_Window(origin) {
-        this.AddonsList.forEach(addon => {
-            return Promise.resolve(addon.Init_Window(origin))
-        })
+    loadExtensionsMenuEvents() {
+        this.extensions.forEach(extension => {
+            document.getElementById(extension.id).addEventListener('click', () => {
+                document.getElementById("MenuFrame").innerHTML = extension.getUI();
+            });
+        });
     }
 }
