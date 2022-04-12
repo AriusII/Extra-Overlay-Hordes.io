@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         REWORK OVERLAY
+// @name         Hordes.io Extra Overlay
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  An extra overlay for Hordes.io, where you can add your own custom overlays(menus) and more.
