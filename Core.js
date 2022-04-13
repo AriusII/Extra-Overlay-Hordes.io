@@ -1,7 +1,7 @@
 class Core {
 
-    name = "arius"
-    FCoreHtml = "https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Core.html"
+    name = "arius";
+    FCoreHtml = "https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Core.html";
     show_ui = false;
     is_loaded = false;
 
