@@ -15,15 +15,6 @@
 // @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/AriusDev/Core.js
 // ==/UserScript==
 
-/**
- * // @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Extensions/Extension.js
- * // @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Extensions/Home/Home.js
- * // @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Core.js
- * // @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/master/Extensions/Extension.js
- * // @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/master/Extensions/Home/Home.js
- * // @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/master/Core.js
- */
-
 /* global Core */
 
 (function() {
