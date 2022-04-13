@@ -26,6 +26,7 @@ class Core {
                     this.createUI();
                 }
             }, 1000);
+            this.KeyboardEvent();
 
             let world = origin.match(/([_a-zA-Z0-9]*?)\.entities\.array\.length;/)[1];
             let coder = origin.match(/\,([_a-zA-Z0-9]*?)=\{clientPlayerInput:\{/)[1];
@@ -87,6 +88,17 @@ class Core {
             document.getElementById(extension.id).addEventListener('click', () => {
                 document.getElementById("MenuFrame").innerHTML = extension.getUI();
             });
+        });
+    }
+    //Create a function named: KeyboardEvent
+    // This function will create an event listener when the CTRL key and the key L are pressed
+    // The function will toggle the UI
+
+    KeyboardEvent() {
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && e.key === 'L') {
+                this.toggleUI();
+            }
         });
     }
 }
