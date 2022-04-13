@@ -1,19 +1,28 @@
 // ==UserScript==
-// @name         REWORK OVERLAY
+// @name         Extra Overlay Hordes.io Dev
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  An extra overlay for Hordes.io, where you can add your own custom overlays(menus) and more.
-// @author       AriusII - ╲⎝⧹ AriusII⧸⎠╱#4556  & Thanks xFuRiOuS#9356 for the help.
+// @author       AriusII & xFuRiOuS#9356.
 // @match        https://hordes.io/play
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=hordes.io
 // @grant        none
 // @namespace    https://greasyfork.org/users/898675
 // @license      MIT
 // @run-at       document-start
-// @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Extensions/Extension.js
-// @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Extensions/Home/Home.js
-// @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Core.js
+// @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/master/Extensions/Extension.js
+// @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/master/Extensions/Home/Home.js
+// @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/master/Core.js
 // ==/UserScript==
+
+/**
+ * // @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Extensions/Extension.js
+ * // @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Extensions/Home/Home.js
+ * // @require      file:///H:/Documents/GitHub/Extra-Overlay-Hordes.io/Core.js
+ * // @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/master/Extensions/Extension.js
+ * // @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/master/Extensions/Home/Home.js
+ * // @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/master/Core.js
+ */
 
 /* global Core */
 
