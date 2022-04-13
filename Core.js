@@ -27,6 +27,13 @@ class Core {
                 }
             }, 1000);
 
+            //create a document addeventlistener when the ALT key and L key are pressed 
+            document.addEventListener('keydown', e => {
+                if (e.altKey && e.key == 'L') {
+                    this.toggleUI();
+                }
+            });
+
             let world = origin.match(/([_a-zA-Z0-9]*?)\.entities\.array\.length;/)[1];
             let coder = origin.match(/\,([_a-zA-Z0-9]*?)=\{clientPlayerInput:\{/)[1];
             let ws = origin.match(/\(([_a-zA-Z0-9]*?)=new WebSocket/)[1];
@@ -55,7 +62,7 @@ class Core {
             </div>`);
         document.querySelector("#uiBtn").addEventListener('click', e => this.toggleUI());
 
-        let coreHtml = await fetch(this.FCoreHmtl).then(res => res.text());
+        let coreHtml = await fetch(this.FCoreHtml).then(res => res.text());
         document.querySelector(".l-ui.layout > .container:first-child").insertAdjacentHTML('beforeend', coreHtml);
         document.querySelector(".MainBody").style.setProperty("display", "none");
 
