@@ -90,13 +90,10 @@ class Core {
             });
         });
     }
-    //Create a function named: KeyboardEvent
-    // This function will create an event listener when the CTRL key and the key L are pressed
-    // The function will toggle the UI
 
     KeyboardEvent() {
         document.addEventListener('keydown', e => {
-            if (e.ctrlKey && e.key === 'L') {
+            if (e.altKey && e.key === 'L') {
                 this.toggleUI();
             }
         });
