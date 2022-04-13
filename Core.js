@@ -26,7 +26,12 @@ class Core {
                     this.createUI();
                 }
             }, 1000);
-            this.KeyboardEvent();
+            
+            document.addEventListener('keydown', e => {
+                if (e.altKey && e.key === 'L') {
+                    this.toggleUI();
+                }
+            });
 
             let world = origin.match(/([_a-zA-Z0-9]*?)\.entities\.array\.length;/)[1];
             let coder = origin.match(/\,([_a-zA-Z0-9]*?)=\{clientPlayerInput:\{/)[1];
@@ -88,14 +93,6 @@ class Core {
             document.getElementById(extension.id).addEventListener('click', () => {
                 document.getElementById("MenuFrame").innerHTML = extension.getUI();
             });
-        });
-    }
-
-    KeyboardEvent() {
-        document.addEventListener('keydown', e => {
-            if (e.altKey && e.key === 'L') {
-                this.toggleUI();
-            }
         });
     }
 }
