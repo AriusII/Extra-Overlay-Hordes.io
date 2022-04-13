@@ -27,18 +27,18 @@ class Core {
                 }
             }, 1000);
 
-            document.addEventListener('keydown', e => {
-                if (e.altKey && e.Key == "L") {
-                    this.toggleUI();
-                }
-            });
-
             let world = origin.match(/([_a-zA-Z0-9]*?)\.entities\.array\.length;/)[1];
             let coder = origin.match(/\,([_a-zA-Z0-9]*?)=\{clientPlayerInput:\{/)[1];
             let ws = origin.match(/\(([_a-zA-Z0-9]*?)=new WebSocket/)[1];
             let send = origin.match(/([_a-zA-Z0-9]*?)=[_a-zA-Z0-9]*?=>\{void 0!==[_a-zA-Z0-9]*?&&1===[_a-zA-Z0-9]*?&&[_a-zA-Z0-9]*?\.send\(.*?\)\}/)[1];
             origin = origin.replace('this.player=t', `Object.assign(window.${this.name}, {world: ${world}, me:t, coder: ${coder}, ws: ${ws}, send: ${send} }), this.player=t`)
             window.origin = origin
+
+            document.addEventListener('keydown', e => {
+                if (e.altKey && e.Key == "l") {
+                    this.toggleUI();
+                }
+            });
 
             document.open().write(html);
             document.close();
