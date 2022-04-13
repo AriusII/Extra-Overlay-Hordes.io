@@ -1,7 +1,6 @@
 class Core {
 
     name = "arius"
-    FCoreHtml = "https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Core.html"
     show_ui = false;
     is_loaded = false;
 
@@ -55,7 +54,7 @@ class Core {
             </div>`);
         document.querySelector("#uiBtn").addEventListener('click', e => this.toggleUI());
 
-        let coreHtml = await fetch(this.FCoreHtml).then(res => res.text());
+        let coreHtml = await fetch("https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Core.html").then(res => res.text());
         document.querySelector(".l-ui.layout > .container:first-child").insertAdjacentHTML('beforeend', coreHtml);
         document.querySelector(".MainBody").style.setProperty("display", "none");
 
