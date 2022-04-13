@@ -6,6 +6,7 @@ class Core {
 
     constructor(extensions) {
         window[this.name] = {};
+        extensions.unshift(new Home());
         this.extensions = extensions;
     }
 
@@ -47,21 +48,21 @@ class Core {
         this.is_loaded = true;
 
         // Create Icon
-        document.querySelector(".l-corner-ur .btnbar #sysgem")?.insertAdjacentHTML('afterend',
+        document.querySelector(".l-corner-ur .btnbar #sysgem").insertAdjacentHTML('afterend',
             `<div id="uiBtn" class="btn border black">
                 <img class="svgicon" src="https://www.svgrepo.com/show/284868/unsecured-shield-hacker.svg">
             </div>`);
-        document.querySelector("#uiBtn")?.addEventListener('click', e => this.toggleUI());
+        document.querySelector("#uiBtn").addEventListener('click', e => this.toggleUI());
 
         let coreHtml = await fetch("https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Core.html").then(res => res.text());
         document.querySelector(".l-ui.layout > .container:first-child").insertAdjacentHTML('beforeend', coreHtml);
         document.querySelector(".MainBody").style.setProperty("display", "none");
 
         this.loadExtensionsMenu();
-        document.getElementById("MenuFrame").innerHTML = new Home().getUI();
+        document.getElementById("MenuFrame").innerHTML = await this.extensions.find(extension => extension instanceof Home).getUI();
         this.loadExtensionsMenuEvents();
 
-        document.querySelector('.CloseMain').addEventListener('click', () => this.toggleUI());
+        document.querySelector('.CloseMain').addEventListener('click', e => this.toggleUI());
     }
 
     toggleUI() {
@@ -76,7 +77,7 @@ class Core {
     loadExtensionsMenu() {
         this.extensions.forEach(extension => {
             document.getElementById("SubMenu").insertAdjacentHTML('beforeend', 
-                `<div id=${extension.name} class="choice">${extension.windowName}</div>`);
+                `<div id=${extension.id} class="choice">${extension.windowName}</div>`);
         });
     }
 
