@@ -26,7 +26,7 @@ class Core {
                     this.createUI();
                 }
             }, 1000);
-            
+
             document.addEventListener('keydown', e => {
                 if (e.altKey && e.key === 'L') {
                     this.toggleUI();
