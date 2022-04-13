@@ -10,9 +10,9 @@
 // @namespace    https://greasyfork.org/users/898675
 // @license      MIT
 // @run-at       document-start
-// @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/AriusDev/Extensions/Extension.js
-// @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/AriusDev/Extensions/Home/Home.js
-// @require      https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/AriusDev/Core.js
+// @require      https://arius.freeboxos.fr/JS/hordesjs/Extensions/Extension.js
+// @require      https://arius.freeboxos.fr/JS/hordesjs/Extensions/Home/Home.js
+// @require      https://arius.freeboxos.fr/JS/hordesjs/Core.js
 // ==/UserScript==
 
 /* global Core */
