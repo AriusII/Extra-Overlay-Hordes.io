@@ -27,12 +27,6 @@ class Core {
                 }
             }, 1000);
 
-            document.addEventListener('keydown', e => {
-                if (e.altKey && e.key === 'L') {
-                    this.toggleUI();
-                }
-            });
-
             let world = origin.match(/([_a-zA-Z0-9]*?)\.entities\.array\.length;/)[1];
             let coder = origin.match(/\,([_a-zA-Z0-9]*?)=\{clientPlayerInput:\{/)[1];
             let ws = origin.match(/\(([_a-zA-Z0-9]*?)=new WebSocket/)[1];
