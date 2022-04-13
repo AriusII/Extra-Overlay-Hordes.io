@@ -1,7 +1,7 @@
 class Core {
 
-    name = "arius";
-    FCoreHtml = "https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Core.html";
+    name = "arius"
+    FCoreHtml = "https://raw.githubusercontent.com/AriusII/Extra-Overlay-Hordes.io/auto-loot/Core.html"
     show_ui = false;
     is_loaded = false;
 
@@ -26,13 +26,6 @@ class Core {
                     this.createUI();
                 }
             }, 1000);
-
-            //create a document addeventlistener when the ALT key and L key are pressed 
-            document.addEventListener('keydown', e => {
-                if (e.altKey && e.key == 'L') {
-                    this.toggleUI();
-                }
-            });
 
             let world = origin.match(/([_a-zA-Z0-9]*?)\.entities\.array\.length;/)[1];
             let coder = origin.match(/\,([_a-zA-Z0-9]*?)=\{clientPlayerInput:\{/)[1];
